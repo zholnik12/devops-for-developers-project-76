@@ -1,19 +1,21 @@
 ---
-- hosts: all
-  become: yes
+- name: Setup base packages on all hosts
+  hosts: all
+  become: true
   pre_tasks:
     - name: Update apt cache
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
       tags: [setup]
   roles:
     - { role: geerlingguy.pip, tags: [setup] }
     - { role: geerlingguy.docker, tags: [setup] }
 
-- hosts: webservers
-  become: yes
+- name: Deploy Redmine and monitoring on webservers
+  hosts: webservers
+  become: true
   roles:
-    - { role: datadog.datadog, become: yes, tags: [monitoring] }
+    - { role: datadog.datadog, become: true, tags: [monitoring] }
 
   tasks:
     - name: Create .env file from template
@@ -23,7 +25,7 @@
         mode: '0600'
       tags: [deploy]
 
-    - name: deploy redmine container
+    - name: Deploy Redmine container
       community.docker.docker_container:
         name: redmine
         image: redmine:latest
