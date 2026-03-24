@@ -1,6 +1,0 @@
----
-pip_install_packages:
-  - name: docker
-
-# Порт, на котором Redmine будет слушать ВНУТРИ сервера
-redmine_port: 8080

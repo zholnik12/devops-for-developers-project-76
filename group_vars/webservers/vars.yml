@@ -4,3 +4,23 @@ db_port: "6432"
 db_name: "db1"
 db_user: "user1"
 db_password: "{{ vault_db_password }}"
+
+datadog_api_key: "{{ vault_datadog_api_key }}"
+datadog_site: "datadoghq.eu" 
+
+# Настройка HTTP проверки
+datadog_checks:
+  http_check:
+    init_config:
+    instances:
+      - name: "Redmine Health Check"
+        # URL, по которому агент будет стучаться в приложение
+        url: "http://localhost:8080" 
+        # Таймаут ожидания ответа (в секундах)
+        timeout: 5
+        # Интервал между проверками (в секундах)
+        interval: 60
+        # Опционально: теги, чтобы легче было искать в панели управления
+        tags:
+          - "project:redmine"
+          - "env:production"

@@ -4,6 +4,12 @@
 __pycache__/
 .ansible_vault_pass
 .ansible-vault
+roles/
+collections/
+.DS_Store
+*.swp
+*.log
+
 
 
 

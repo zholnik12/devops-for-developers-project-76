@@ -5,6 +5,11 @@
     - { role: geerlingguy.pip, tags: [setup] }
     - { role: geerlingguy.docker, tags: [setup] }
 
+- hosts: webservers
+  become: yes
+  roles:
+    - { role: datadog.datadog, become: yes, tags: [monitoring] }
+
   tasks:
     - name: Create .env file from template
       ansible.builtin.template:
