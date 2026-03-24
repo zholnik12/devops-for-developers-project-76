@@ -2,6 +2,7 @@
 roles:
   - name: geerlingguy.pip
   - name: geerlingguy.docker
+    version: "6.7.1"
   - name: datadog.datadog
 
 collections:
